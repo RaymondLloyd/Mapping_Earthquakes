@@ -32,13 +32,11 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the airport GeoJSON URL
-let airportData = "https://raw.githubusercontent.com/Gee8/Mapping_Earthquakes/main/majorAirports.json";
+let airportData = "https://raw.githubusercontent.com/RaymondLloyd/Mapping_Earthquakes/main/majorAirports.json";
 
 // Grabbing our GeoJSON data.
-L.geoJson(sanFranAirport, {
-  // We turn each feature into a marker on the map.
-  onEachFeature: function(feature, layer) {
-    console.log(feature);
-    layers.bindPopup();
-  }
-}).addTo(map);
+d3.json(airportData).then(function(data) {
+    console.log(data);
+  // Creating a GeoJSON layer with the retreived data.
+  L.geoJson(data).addTo(map);
+});
